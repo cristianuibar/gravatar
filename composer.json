@@ -1,6 +1,6 @@
 {
-    "name": "Uibar/Gravatar",
-    "description": "Laravel 5 Gravatar helper.",
+    "name": "uibar/gravatar",
+    "description": "Gravatar helper for Laravel 5",
     "keywords": ["laravel", "laravel5", "gravatar", "helper"],
     "license": "MIT",
     "authors": [
