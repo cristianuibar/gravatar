@@ -50,3 +50,12 @@ $attributes =>      The extra attributes you need for the image tag if you chose
 
 ##License
 This package is released under the MIT license and is free for all.
+
+##Thank you!
+Thanks to these amazing people and their packages I got inspired to write my own representation of Gravatar Helper.
+
+- [GRAVATARLIB - by emberlabs](https://github.com/emberlabs/gravatarlib)
+- [LARAVEL-GRAVATAR - by thomaswelton](https://github.com/thomaswelton/laravel-gravatar)
+- [GRAVATAR - by creativeorange](https://github.com/creativeorange/gravatar)
+
+Thank you!
