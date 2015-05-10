@@ -9,7 +9,7 @@ class Gravatar implements Contracts\GravatarInterface
 
     protected $size = 80;
 
-    protected $defaultGravatar = 'mm';
+    protected $defaults = 'mm';
 
     protected $rating = 'g';
 
@@ -23,7 +23,8 @@ class Gravatar implements Contracts\GravatarInterface
      *
      * @param   string $email The email for which to fetch the avatar
      * @param   int $size The desired size of the avatar (in pixels [1-2048])
-     * @param   string $defaultGravatar Default image set to use if avatar not found
+     * @param   string $defaults Default image set to use if avatar not found
+     *                          [ 404 | mm | identicon | monsterid | wavatar ]
      * @param   string $rating The maximum rating you want to allow [ g | pg | r | x ]
      * @param   bool $image The return should be a full image tag?
      * @param   array $attributes Additional key=value pairs to include in the image tag
@@ -32,9 +33,9 @@ class Gravatar implements Contracts\GravatarInterface
      *
      * @throws EmptyEmailException
      */
-    public function get($email, $size = 80, $defaultGravatar = 'mm', $rating = 'g', $image = false, $attributes = [])
+    public function get($email, $size = 80, $defaults = 'mm', $rating = 'g', $image = false, $attributes = [])
     {
-        $url = $this->getFinalUrl($email, $size, $defaultGravatar, $rating);
+        $url = $this->getFinalUrl($email, $size, $defaults, $rating);
 
         if ($image) {
             $url = '<img src="' . $url . '"';
@@ -46,7 +47,7 @@ class Gravatar implements Contracts\GravatarInterface
     }
 
     /**
-     * Used to end the method chaining.
+     * Used to end the method chaining and deliver the final result.
      *
      * @return string The url or the full image tag of the Gravatar
      * @throws Exception If no email was provided.
@@ -56,7 +57,7 @@ class Gravatar implements Contracts\GravatarInterface
         if (!$this->email) $this->exception('No email was provided.');
         return $this->get(
             $this->email, $this->size,
-            $this->defaultGravatar, $this->rating,
+            $this->defaults, $this->rating,
             $this->image, $this->attributes);
     }
 
@@ -79,16 +80,16 @@ class Gravatar implements Contracts\GravatarInterface
      *
      * @param $email
      * @param $size
-     * @param $defaultGravatar
+     * @param $defaults
      * @param $rating
      *
      * @return string The final URL.
      */
-    protected function getFinalUrl($email, $size, $defaultGravatar, $rating)
+    protected function getFinalUrl($email, $size, $defaults, $rating)
     {
         $url = $this->getBaseUrl();
         $url .= md5($this->prepEmail($email));
-        $url .= "?s=$size&d=$defaultGravatar&r=$rating";
+        $url .= "?s=$size&d=$defaults&r=$rating";
 
         return $url;
     }
@@ -148,12 +149,12 @@ class Gravatar implements Contracts\GravatarInterface
     /**
      * Updates the default gravatar to be returned if user has no Garavtar defined.
      *
-     * @param string $defaultGravatar
+     * @param string $defaults
      * @return object
      */
-    public function defaultGravatar($defaultGravatar)
+    public function defaults($defaults)
     {
-        $this->defaultGravatar = $defaultGravatar;
+        $this->defaults = $defaults;
         return $this;
     }
 
