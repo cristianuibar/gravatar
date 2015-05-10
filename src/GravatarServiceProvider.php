@@ -17,7 +17,7 @@ class GravatarServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the Gravatar class.
+     * Register the Gravatar service.
      *
      * @return void
      */
