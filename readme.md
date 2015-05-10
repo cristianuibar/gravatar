@@ -37,10 +37,15 @@ To get a more customized image just pass in the additional parameters:
 ```
 
 $email      =>      The email of the Gravatar
+
 $size       =>      The size in pixels \[ 1 - 2048 \]
+
 $default    =>      Default image set to use if avatar not found \[ 404 | mm | identicon | monsterid | wavatar \]
+
 $rating     =>      Accepted image rating  \[ g | pg | r | x \]
+
 $image      =>      TRUE or FALSE if you want or not to return the full image tag instead of the image URL
+
 $attributes =>      The extra attributes you need for the image tag if you chose this way
 
 ##License
