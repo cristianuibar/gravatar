@@ -10,22 +10,20 @@ This package is a quick and simple way to implement Gravatar in your Laravel pro
 
 ##Install
 1. Get the package
-
-```php
-composer require uibar/gravatar
-```
+    ```php
+    composer require uibar/gravatar
+    ```
 
 2. Add the Service Provider and the Facade to your config/app.php file
+    ```php
+    'providers' => [
+        'Uibar\Gravatar\GravatarServiceProvider',
+    ```
     
-```php
-'providers' => [
-    'Uibar\Gravatar\GravatarServiceProvider',
-```
-
-```php
-'aliases' => [
-    'Gravatar' => 'Uibar\Gravatar\Facades\Gravatar',
-```
+    ```php
+    'aliases' => [
+        'Gravatar' => 'Uibar\Gravatar\Facades\Gravatar',
+    ```
 
 ##Use
 In your views file where you want to display the Gravatar just write:
@@ -45,7 +43,7 @@ This will return a default of 80x80 avatar url string to your Gravatar.
 To get a more customized image just pass in the additional parameters:
 
 ```php
-    Gravatar::get($email, $size, $default, $rating, $image, $attributes);
+Gravatar::get($email, $size, $default, $rating, $image, $attributes);
 ```
 
 $email      =>      The email of the Gravatar
