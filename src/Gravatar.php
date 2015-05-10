@@ -17,7 +17,7 @@ class Gravatar implements Contracts\GravatarInterface {
      *
      * @return  string  Contains either the url or the full image tag of the avatar
      */
-    public function url($email, $size = 80, $default = 'mm', $rating = 'g', $image = false, $attributes = [])
+    public function get($email, $size = 80, $default = 'mm', $rating = 'g', $image = false, $attributes = [])
     {
         $url = 'http://www.gravatar.com/avatar/';
         $url .= md5( strtolower( trim( $email ) ) );

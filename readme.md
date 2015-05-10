@@ -24,7 +24,7 @@ A quick and simple implementation of Gravatar for Laravel. Enjoy!
 In your views file where you want to display the Gravatar just write:
 
 ```php
-    Gravatar::url('user@domain.com');
+    Gravatar::get('user@domain.com');
 ```
 
 This will return a default of 80x80 avatar url string to your Gravatar.
@@ -33,7 +33,7 @@ This will return a default of 80x80 avatar url string to your Gravatar.
 To get a more customized image just pass in the additional parameters:
 
 ```php
-    Gravatar::url($email, $size, $default, $rating, $image, $attributes);
+    Gravatar::get($email, $size, $default, $rating, $image, $attributes);
 ```
 
 $email      =>      The email of the Gravatar

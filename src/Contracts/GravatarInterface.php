@@ -17,5 +17,5 @@ interface GravatarInterface
      *
      * @return  string  Contains either the url or the full image tag of the avatar
      */
-    public function url($email, $size, $default, $rating, $image, $attributes);
+    public function get($email, $size, $default, $rating, $image, $attributes);
 }
