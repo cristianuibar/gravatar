@@ -66,7 +66,7 @@ However, there is a way to force using HTTPS to retrieve the Gravatar. Use the f
 $secure_url = Gravatar::forceSecure()->make('user@domain.com');
 // Or you could specify inside the make() parameter array like this:
 $secure_url = Gravatar::make(['email' => 'user@domain.com', 'forceSecure' => TRUE]);
-``
+```
 
 ##Customize
 To be able to customize your Gravatar return you can refer to the following elements:
