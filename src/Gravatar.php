@@ -1,5 +1,7 @@
 <?php namespace Uibar\Gravatar;
 
+use Illuminate\Http\Request;
+
 class Gravatar implements Contracts\GravatarInterface
 {
 
@@ -101,8 +103,7 @@ class Gravatar implements Contracts\GravatarInterface
      */
     protected function getBaseUrl()
     {
-        //TODO: Append the correct HTTP or HTTPS based on request type.
-        return 'http://'.static::AVATAR_BASE_URL;
+        return $this->getRequestType().'://'.static::AVATAR_BASE_URL;
     }
 
     /**
@@ -116,6 +117,11 @@ class Gravatar implements Contracts\GravatarInterface
     protected function exception($message = '')
     {
         throw new Exception($message);
+    }
+
+    protected function getRequestType()
+    {
+        return Request::secure() ? 'https' : 'http';
     }
 
     /**################################**
