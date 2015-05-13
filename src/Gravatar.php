@@ -15,8 +15,6 @@ class Gravatar implements Contracts\GravatarInterface
 
     protected $rating = 'g';
 
-    protected $image = FALSE;
-
     protected $attributes = [];
 
     /**
@@ -51,16 +49,17 @@ class Gravatar implements Contracts\GravatarInterface
     /**
      * Used to end the method chaining and deliver the final result.
      *
+     * @param bool $image Do you want to generate a full image tag?
      * @return string The url or the full image tag of the Gravatar
      * @throws Exception If no email was provided.
      */
-    public function make()
+    public function make($image = FALSE)
     {
         if (!$this->email) $this->exception('No email was provided.');
         return $this->get(
             $this->email, $this->size,
             $this->defaults, $this->rating,
-            $this->image, $this->attributes);
+            $image, $this->attributes);
     }
 
     /**################################**
@@ -176,6 +175,10 @@ class Gravatar implements Contracts\GravatarInterface
         return $this;
     }
 
-    //TODO: Method chaining to generate full image tag.
+    public function attributes(Array $attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
 
 }
