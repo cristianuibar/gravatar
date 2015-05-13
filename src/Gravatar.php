@@ -1,7 +1,5 @@
 <?php namespace Uibar\Gravatar;
 
-use Illuminate\Http\Request;
-
 class Gravatar implements Contracts\GravatarInterface
 {
 
@@ -18,20 +16,16 @@ class Gravatar implements Contracts\GravatarInterface
     protected $attributes = [];
 
     /**
-     * This function is used as a quick way for
-     * the user to return the avatar url or the image.
+     * This function is used as a quick way for the user to return the avatar url or the image.
      *
-     * @param   string $email The email for which to fetch the avatar
-     * @param   int $size The desired size of the avatar (in pixels [1-2048])
-     * @param   string $defaults Default image set to use if avatar not found
-     *                          [ 404 | mm | identicon | monsterid | wavatar ]
-     * @param   string $rating The maximum rating you want to allow [ g | pg | r | x ]
-     * @param   bool $image The return should be a full image tag?
-     * @param   array $attributes Additional key=value pairs to include in the image tag
-     *
+     * @param   string  $email      The email for which to fetch the avatar
+     * @param   int     $size       The desired size of the avatar (in pixels [1-2048])
+     * @param   string  $defaults   Default image set to use if avatar not found [ 404 | mm | identicon | monsterid | wavatar ]
+     * @param   string  $rating     The maximum rating you want to allow [ g | pg | r | x ]
+     * @param   bool    $image      The return should be a full image tag?
+     * @param   array   $attributes Additional key=value pairs to include in the image tag
      * @return  string  Contains either the url or the full image tag of the avatar
-     *
-     * @throws EmptyEmailException
+     * @throws Exception
      */
     public function get($email, $size = 80, $defaults = 'mm', $rating = 'g', $image = false, $attributes = [])
     {
@@ -49,9 +43,9 @@ class Gravatar implements Contracts\GravatarInterface
     /**
      * Used to end the method chaining and deliver the final result.
      *
-     * @param bool $image Do you want to generate a full image tag?
-     * @return string The url or the full image tag of the Gravatar
-     * @throws Exception If no email was provided.
+     * @param   bool    $image      Do you want to generate a full image tag?
+     * @return  string  The url or the full image tag of the Gravatar
+     * @throws  Exception
      */
     public function make($image = FALSE)
     {
@@ -79,12 +73,11 @@ class Gravatar implements Contracts\GravatarInterface
     /**
      * Append every item to the final URL.
      *
-     * @param $email
-     * @param $size
-     * @param $defaults
-     * @param $rating
-     *
-     * @return string The final URL.
+     * @param   string  $email
+     * @param   int     $size
+     * @param   string  $defaults
+     * @param   string  $rating
+     * @return  string  The final URL.
      */
     protected function getFinalUrl($email, $size, $defaults, $rating)
     {
@@ -96,31 +89,35 @@ class Gravatar implements Contracts\GravatarInterface
     }
 
     /**
-     * Used to apped the correct request type.
+     * Append all elements for the base URL.
      *
-     * @return string The Base URL of Gravatar
+     * @return  string  The Base URL of Gravatar
      */
     protected function getBaseUrl()
     {
-        return $this->getRequestType().'://'.static::AVATAR_BASE_URL;
+        return $this->getRequestProtocol().'://'.static::AVATAR_BASE_URL;
     }
 
     /**
      * Used to handle exceptions Lib-wide.
      *
-     * @param string $message The message to be displayed to the user.
-     * @throws Exception
-     *
-     * @return void
+     * @param   string  $message    The message to be displayed to the user.
+     * @return  void
+     * @throws  Exception
      */
     protected function exception($message = '')
     {
         throw new Exception($message);
     }
 
-    protected function getRequestType()
+    /**
+     * Helps the class to determine the protocol to use when generating final URL.
+     *
+     * @return  string  The protocol that the request is using.
+     */
+    protected function getRequestProtocol()
     {
-        return Request::secure() ? 'https' : 'http';
+        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https' : 'http';
     }
 
     /**################################**
@@ -130,8 +127,8 @@ class Gravatar implements Contracts\GravatarInterface
     /**
      * Define the email address used to generate the avatar URL.
      *
-     * @param string $email
-     * @return object
+     * @param   string  $email
+     * @return  object
      */
     public function email($email)
     {
@@ -142,8 +139,8 @@ class Gravatar implements Contracts\GravatarInterface
     /**
      * Updates the size of the final avatar URL.
      *
-     * @param int $size
-     * @return object
+     * @param   int $size
+     * @return  object
      */
     public function size($size)
     {
@@ -154,8 +151,8 @@ class Gravatar implements Contracts\GravatarInterface
     /**
      * Updates the default gravatar to be returned if user has no Garavtar defined.
      *
-     * @param string $defaults
-     * @return object
+     * @param   string  $defaults
+     * @return  object
      */
     public function defaults($defaults)
     {
@@ -166,8 +163,8 @@ class Gravatar implements Contracts\GravatarInterface
     /**
      * Updates the default rating that the return image should allow.
      *
-     * @param string $rating
-     * @return object
+     * @param   string  $rating
+     * @return  object
      */
     public function rating($rating)
     {
@@ -175,6 +172,12 @@ class Gravatar implements Contracts\GravatarInterface
         return $this;
     }
 
+    /**
+     * Updates the protected $attributes variable with the new data.
+     *
+     * @param   array   $attributes
+     * @return  object
+     */
     public function attributes(Array $attributes)
     {
         $this->attributes = $attributes;
