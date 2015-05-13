@@ -15,6 +15,8 @@ class Gravatar implements Contracts\GravatarInterface
 
     protected $attributes = [];
 
+    protected $force_secure = FALSE;
+
     /**
      * This function is used as a quick way for the user to return the avatar url or the image.
      *
@@ -112,6 +114,9 @@ class Gravatar implements Contracts\GravatarInterface
                     case 'attributes':
                         $this->attributes = $value;
                         break;
+                    case 'forceSecure':
+                        $this->force_secure = $value;
+                        break;
                 }
         } elseif (is_string($params))
             $this->email = $params;
@@ -183,6 +188,7 @@ class Gravatar implements Contracts\GravatarInterface
      */
     protected function getRequestPrefix()
     {
+        if ($this->force_secure) return 'https://secure.';
         return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https://secure.' : 'http://';
     }
 
@@ -247,6 +253,12 @@ class Gravatar implements Contracts\GravatarInterface
     public function attributes(Array $attributes)
     {
         $this->attributes = $attributes;
+        return $this;
+    }
+
+    public function forceSecure($fs = TRUE)
+    {
+        if (is_bool($fs)) $this->force_secure = $fs;
         return $this;
     }
 

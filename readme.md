@@ -15,9 +15,10 @@ This package is a quick and simple way to implement Gravatar in your Laravel pro
 * Secure connection auto-setting
 
 ## Future Features
-I am planning to implement the following feature in the future:
-* Gravatar Profiles handling
+Planned features for the future:
+* Possibility to use your own custom image as default (like a logo or something)
 * Configuration file for defaults
+* Gravatar Profiles handling
 
 ##Install
 1. Get the package
@@ -56,6 +57,16 @@ Of course we can also generate a full image tag. For your ease we can do this in
 ```
 
 All of these will return a default of 80x80 Gravatar.
+
+##Secure Connections
+The class will set the Gravatar URL automatically based on the Request type. So you don't need to worry about what connection type to use if you have SSL enabled on your domain.
+
+However, there is a way to force using HTTPS to retrieve the Gravatar. Use the forceSecure() method.
+```php
+$secure_url = Gravatar::forceSecure()->make('user@domain.com');
+// Or you could specify inside the make() parameter array like this:
+$secure_url = Gravatar::make(['email' => 'user@domain.com', 'forceSecure' => TRUE]);
+``
 
 ##Customize
 To be able to customize your Gravatar return you can refer to the following elements:
