@@ -25,7 +25,7 @@ class Gravatar implements Contracts\GravatarInterface
      * @param   bool    $image      The return should be a full image tag?
      * @param   array   $attributes Additional key=value pairs to include in the image tag
      * @return  string  Contains either the url or the full image tag of the avatar
-     * @throws Exception
+     * @throws \Exception
      */
     public function get($email, $size = 80, $defaults = 'mm', $rating = 'g', $image = false, $attributes = [])
     {
@@ -43,12 +43,15 @@ class Gravatar implements Contracts\GravatarInterface
     /**
      * Used to end the method chaining and deliver the final result.
      *
-     * @param   bool    $image      Do you want to generate a full image tag?
+     * @param   array|string|bool   $params
+     * @param   array               $attributes
      * @return  string  The url or the full image tag of the Gravatar
-     * @throws  Exception
+     * @throws  \Exception
      */
-    public function make($image = FALSE)
+    public function make($params = NULL, Array $attributes = NULL)
     {
+        $image = $this->fetchMakeParams($params, $attributes);
+
         if (!$this->email) $this->exception('No email was provided.');
         return $this->get(
             $this->email, $this->size,
@@ -61,14 +64,77 @@ class Gravatar implements Contracts\GravatarInterface
     #####   ~can be used publicly~  #####
     **################################**/
 
+    /**
+     * @param   string  $email      The e-mail address to be prepared.
+     * @return  string|void
+     * @throws \Exception
+     */
     public function prepEmail($email)
     {
+        if (!$this->isValidEmail($email)) return $this->exception('Invalid email format.');
         return strtolower(trim($email));
     }
 
     /**################################**
     #####       LIBRARY SPECIFIC    #####
     **################################**/
+
+    /**
+     * Fetches the parameters from the make method and returns
+     * a BOOL value to know if we generate an image tag or just the URL.
+     *
+     * @param   array|string|bool   $params
+     * @param   array               $attributes
+     * @return bool
+     */
+    protected function fetchMakeParams($params, Array $attributes = NULL)
+    {
+        $image = FALSE;
+        if (is_array($params)) {
+            foreach($params as $key => $value)
+                switch ($key)
+                {
+                    case 'email':
+                        $this->email = $value;
+                        break;
+                    case 'image':
+                        $image = $value;
+                        break;
+                    case 'size':
+                        $this->size = $value;
+                        break;
+                    case 'defaults':
+                        $this->defaults = $value;
+                        break;
+                    case 'rating':
+                        $this->rating = $value;
+                        break;
+                    case 'attributes':
+                        $this->attributes = $value;
+                        break;
+                }
+        } elseif (is_string($params))
+            $this->email = $params;
+        elseif (is_bool($params))
+            return $params;
+
+        if (!empty($attributes)) {
+            $this->attributes = $attributes;
+            $image = TRUE;
+        }
+
+        return $image;
+    }
+
+    /**
+     * Checks to see if the given email is in a valid format.
+     *
+     * @param   string  $email The string to be checked.
+     * @return  bool
+     */
+    function isValidEmail($email){
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
 
     /**
      * Append every item to the final URL.
@@ -103,11 +169,11 @@ class Gravatar implements Contracts\GravatarInterface
      *
      * @param   string  $message    The message to be displayed to the user.
      * @return  void
-     * @throws  Exception
+     * @throws  \Exception
      */
     protected function exception($message = '')
     {
-        throw new Exception($message);
+        throw new \Exception($message);
     }
 
     /**
