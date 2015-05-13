@@ -10,7 +10,7 @@ This package is a quick and simple way to implement Gravatar in your Laravel pro
 
 ##Features
 * URL generation with customized parameters
-* Full <img> tags generation with customized parameters and HTML attributes
+* Full img tags generation with customized parameters and HTML attributes
 * Supports method chaining
 
 ## Future Features
@@ -42,11 +42,14 @@ $gravatar_url = Gravatar::make('user@domain.com');
 
 Of course we can also generate a full image tag. For your ease we can do this in multiple ways. Either way, the email is required to be specified.
 ```php
-//We can directly specify some HTML tags as the second parameter of the make() method like this:
+//We can directly specify some HTML tags as the second parameter of the
+    make() method like this:
 {!! Gravatar::make('email@address.com', ['class' => 'img-circle']) !!}
-//We could specify the email using Method Chaining and then passing TRUE to the make() method
+//We could specify the email using Method Chaining and then passing TRUE
+    to the make() method
 {!! Gravatar::email('user@domain.com')->make(TRUE) !!}
-//Or we can pass an array as the first parameter containing the email and the image key as TRUE like this:
+//Or we can pass an array as the first parameter containing the email and
+    the image key as TRUE like this:
 {!! Gravatar::make(['email' => Auth::user()->email, 'image' => TRUE]) !!}
 ```
 
@@ -71,7 +74,8 @@ These elements can be changed either by passing them in the first parameter of t
 
 Here are three customized examples with the same effect that illustrates the customization methods:
 ```php
-// The following will output a full image tag with custom size, rating and attributes for the img tag:
+// The following will output a full image tag with custom size, rating and
+    attributes for the img tag:
 {!! Gravatar::make([
     'email' => 'user@domain.com',
     'size' => 40,
@@ -79,7 +83,9 @@ Here are three customized examples with the same effect that illustrates the cus
     'image' => TRUE,
     'attributes' => ['class' => 'img-circle']
 ]) !!}
-// The same effect could be accomplished by passing the attributes for the img tag as second parameter of the make method and thus not specifying the image key as TRUE anymore
+// The same effect could be accomplished by passing the attributes for the
+    img tag as second parameter of the make method and thus not specifying the
+    image key as TRUE anymore
 {!! Gravatar::make([
     'email' => 'user@domain.com',
     'size' => 40,
@@ -87,7 +93,8 @@ Here are three customized examples with the same effect that illustrates the cus
 ], ['class' => 'img-circle']) !!}
 // Using the get() method
 {!! Gravatar::get('user@domain.com', 40, 'identicon', 'x', TRUE, ['class' => 'img-circle']); !!}
-// The order of the elements using this way DOSE MATTER. It will not work unless you use it using this exact order:
+// The order of the elements using this way DOSE MATTER. It will not work unless
+    you use it using this exact order:
 $url = Gravatar::get($email, $size, $default, $rating, $image, $attributes);
 ```
 It's up to you to chose the one that best fits your needs.
@@ -97,9 +104,11 @@ You can use method chaining to customize your Gravatar. The same method names ar
 
 ```php
 //For custom URLs:
-$custom_url = Gravatar::email('custom@email.com')->size(40)->defaults('identicon')->rating('x')->make();
+$custom_url = Gravatar::email('custom@email.com')->size(40)
+    ->defaults('identicon')->rating('x')->make();
 //For custom img tag:
-{!! Gravatar::email('custom@email.com')->size(40)->rating('x')->attributes(['class' => 'img-circle'])->make(TRUE) !!}
+{!! Gravatar::email('custom@email.com')->size(40)->rating('x')
+    ->attributes(['class' => 'img-circle'])->make(TRUE) !!}
 //Or as learned above we could do:
 {!! Gravatar::size(40)->rating('x')->make('user@domain.com', ['class' => 'img-circle']) !!}
 ```
