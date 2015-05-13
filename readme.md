@@ -71,17 +71,19 @@ $secure_url = Gravatar::make(['email' => 'user@domain.com', 'forceSecure' => TRU
 ##Customize
 To be able to customize your Gravatar return you can refer to the following elements:
 
-$email      =>      The email of the Gravatar
+$email          =>      The email of the Gravatar
 
-$size       =>      The size in pixels \[1 - 2048\]
+$size           =>      The size in pixels \[1 - 2048\]
 
-$defaults    =>      Default image set to use if avatar not found \[404 | mm | identicon | monsterid | wavatar\]
+$defaults       =>      Default image set to use if avatar not found \[404 | mm | identicon | monsterid | wavatar\]
 
-$rating     =>      Accepted image rating  \[g | pg | r | x\]
+$rating         =>      Accepted image rating  \[g | pg | r | x\]
 
-$image      =>      TRUE or FALSE if you want or not to return the full image tag instead of the image URL
+$image          =>      TRUE or FALSE if you want or not to return the full image tag instead of the image URL
 
-$attributes =>      The extra attributes you need for the image tag if you chose this way
+$attributes     =>      The extra attributes you need for the image tag if you chose this way
+
+$forceSecure    =>      Forces the connection to be secure (TRUE | FALSE)
 
 These elements can be changed either by passing them in the first parameter of the make() method as array keys (the order doesn't matter), by Method Chaining or trough the get() method params.
 
