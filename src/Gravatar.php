@@ -161,7 +161,7 @@ class Gravatar implements Contracts\GravatarInterface
      */
     protected function getBaseUrl()
     {
-        return $this->getRequestProtocol().'://'.static::AVATAR_BASE_URL;
+        return $this->getRequestPrefix().static::AVATAR_BASE_URL;
     }
 
     /**
@@ -177,13 +177,13 @@ class Gravatar implements Contracts\GravatarInterface
     }
 
     /**
-     * Helps the class to determine the protocol to use when generating final URL.
+     * Helps the class to determine the protocol and prefix to use when generating final URL.
      *
-     * @return  string  The protocol that the request is using.
+     * @return  string  The protocol and prefix that the request will use.
      */
-    protected function getRequestProtocol()
+    protected function getRequestPrefix()
     {
-        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https' : 'http';
+        return (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https://secure.' : 'http://';
     }
 
     /**################################**

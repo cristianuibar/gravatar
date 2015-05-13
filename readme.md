@@ -12,10 +12,12 @@ This package is a quick and simple way to implement Gravatar in your Laravel pro
 * URL generation with customized parameters
 * Full img tags generation with customized parameters and HTML attributes
 * Supports method chaining
+* Secure connection auto-setting
 
 ## Future Features
 I am planning to implement the following feature in the future:
 * Gravatar Profiles handling
+* Configuration file for defaults
 
 ##Install
 1. Get the package
@@ -101,7 +103,7 @@ $url = Gravatar::get($email, $size, $default, $rating, $image, $attributes);
 It's up to you to chose the one that best fits your needs.
 
 ##Method Chaining
-You can use method chaining to customize your Gravatar. The same method names are used as the element names above. Let's see an example:
+You can use method chaining to customize your Gravatar. The same method names are used as the element names above. Let's see some examples:
 
 ```php
 // For custom URLs:
