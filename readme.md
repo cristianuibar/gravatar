@@ -54,6 +54,9 @@ Of course we can also generate a full image tag. For your ease we can do this in
 // Or we can pass an array as the first parameter containing the email and
 // the image key as TRUE like this:
 {!! Gravatar::make(['email' => Auth::user()->email, 'image' => TRUE]) !!}
+// You could also use the image() method chaining if you don't want to
+// specify any parameters like so:
+{!! Gravatar::image()->make('email@domain.com') !!}
 ```
 
 All of these will return a default of 80x80 Gravatar.
