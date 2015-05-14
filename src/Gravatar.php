@@ -17,6 +17,8 @@ class Gravatar implements Contracts\GravatarInterface
 
     protected $force_secure = FALSE;
 
+    protected $image = FALSE;
+
     /**
      * This function is used as a quick way for the user to return the avatar url or the image.
      *
@@ -33,7 +35,7 @@ class Gravatar implements Contracts\GravatarInterface
     {
         $url = $this->getFinalUrl($email, $size, $defaults, $rating);
 
-        if ($image) {
+        if ($image || $this->image) {
             $url = '<img src="' . $url . '"';
             foreach ($attributes as $key => $val)
                 $url .= ' ' . $key . '="' . $val . '"';
@@ -47,14 +49,13 @@ class Gravatar implements Contracts\GravatarInterface
      *
      * @param   array|string|bool   $params
      * @param   array               $attributes
-     * @return  string  The url or the full image tag of the Gravatar
+     * @return  string|void The url or the full image tag of the Gravatar
      * @throws  \Exception
      */
     public function make($params = NULL, Array $attributes = NULL)
     {
         $image = $this->fetchMakeParams($params, $attributes);
 
-        if (!$this->email) $this->exception('No email was provided.');
         return $this->get(
             $this->email, $this->size,
             $this->defaults, $this->rating,
@@ -137,7 +138,7 @@ class Gravatar implements Contracts\GravatarInterface
      * @param   string  $email The string to be checked.
      * @return  bool
      */
-    function isValidEmail($email){
+    protected function isValidEmail($email){
         return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 
@@ -148,10 +149,12 @@ class Gravatar implements Contracts\GravatarInterface
      * @param   int     $size
      * @param   string  $defaults
      * @param   string  $rating
-     * @return  string  The final URL.
+     * @return  string|void  The final URL.
      */
     protected function getFinalUrl($email, $size, $defaults, $rating)
     {
+        if (empty($email)) return $this->exception('No email was provided.');
+
         $url = $this->getBaseUrl();
         $url .= md5($this->prepEmail($email));
         $url .= "?s=$size&d=$defaults&r=$rating";
@@ -256,9 +259,27 @@ class Gravatar implements Contracts\GravatarInterface
         return $this;
     }
 
+    /**
+     * Forces the final URL for the Gravatar to be secure
+     *
+     * @param   bool    $fs
+     * @return  object
+     */
     public function forceSecure($fs = TRUE)
     {
         if (is_bool($fs)) $this->force_secure = $fs;
+        return $this;
+    }
+
+    /**
+     * Final return should be a full HTML img tag
+     *
+     * @param   bool  $fs
+     * @return  object
+     */
+    public function image($fs = TRUE)
+    {
+        if (is_bool($fs)) $this->image = $fs;
         return $this;
     }
 
