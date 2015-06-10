@@ -1,4 +1,4 @@
-# Gravatar for Laravel 5
+# Gravatar for Laravel 5 & 5.1
 
 [![Build Status](https://travis-ci.org/uibar/gravatar.svg?branch=master)](https://travis-ci.org/uibar/gravatar)
 [![Latest Stable Version](https://poser.pugx.org/uibar/gravatar/v/stable)](https://packagist.org/packages/uibar/gravatar)
