@@ -5,6 +5,9 @@
 [![Total Downloads](https://poser.pugx.org/uibar/gravatar/downloads)](https://packagist.org/packages/uibar/gravatar)
 [![Latest Unstable Version](https://poser.pugx.org/uibar/gravatar/v/unstable)](https://packagist.org/packages/uibar/gravatar)
 [![License](https://poser.pugx.org/uibar/gravatar/license)](https://packagist.org/packages/uibar/gravatar)
+[![Project Status](https://stillmaintained.com/uibar/gravatar.png)](https://stillmaintained.com/uibar/gravatar)
+
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/262890bb-3f43-4bc5-b8a4-a6bdde2a650c/big.png)](https://insight.sensiolabs.com/projects/262890bb-3f43-4bc5-b8a4-a6bdde2a650c)
 
 This package is a quick and simple way to implement Gravatar in your Laravel project. Enjoy!
 
