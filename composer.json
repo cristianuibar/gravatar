@@ -1,35 +1,40 @@
 {
-    "name": "uibar/gravatar",
-    "description": "Gravatar for Laravel 5",
-    "keywords": ["laravel", "laravel5", "gravatar", "helper"],
-    "license": "MIT",
-    "authors": [
-      {
-        "name": "Uibar Ion-Cristian",
-        "email": "uibar.cristian.eu@gmail.com"
-      }
-    ],
-    "require": {
-      "php": ">=5.4.0",
-      "illuminate/support": "~5.0"
-    },
-    "require-dev": {
-      "phpunit/phpunit": "~4.0",
-      "mockery/mockery": "~0.9.4"
-    },
-    "autoload": {
-        "psr-4": {
-            "Uibar\\Gravatar\\": "src/"
-        }
-    },
-    "extra": {
-      "branch-alias": {
-        "dev-master": "0.2.x-dev"
-      }
-    },
-    "config": {
-      "preferred-install": "dist"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+  "name": "uibar/gravatar",
+  "description": "Gravatar for Laravel 5",
+  "keywords": [
+    "laravel",
+    "laravel5",
+    "gravatar",
+    "helper"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Uibar Ion-Cristian",
+      "email": "uibar.cristian.eu@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "illuminate/support": "~5.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0",
+    "mockery/mockery": "~0.9.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Uibar\\Gravatar\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "0.2.x-dev"
+    }
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
 }
